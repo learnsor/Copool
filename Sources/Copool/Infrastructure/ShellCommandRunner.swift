@@ -16,7 +16,11 @@ struct CommandResult {
 #if !os(iOS)
 enum CommandRunner {
     #if os(Windows)
-    private static let systemSearchPaths: [String] = []
+    private static let systemSearchPaths = [
+        "C:\\Windows\\System32",
+        "C:\\Windows",
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0",
+    ]
     #else
     private static let systemSearchPaths = [
         "/opt/homebrew/bin",
@@ -226,7 +230,16 @@ enum CommandRunner {
             .split(separator: ";")
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
             .filter { !$0.isEmpty }
-        return [name] + pathExtensions.map { name + $0.lowercased() } + pathExtensions.map { name + $0.uppercased() }
+        var seen = Set<String>()
+        var candidates = [name]
+        for pathExtension in pathExtensions {
+            for candidate in [name + pathExtension.lowercased(), name + pathExtension.uppercased()] {
+                if seen.insert(candidate.lowercased()).inserted {
+                    candidates.append(candidate)
+                }
+            }
+        }
+        return candidates
         #else
         return [name]
         #endif

@@ -120,7 +120,6 @@ final class ProxyPageModelTests: XCTestCase {
         )
     }
 }
-#endif
 
 private final class InMemoryAccountsStoreRepository: AccountsStoreRepository, @unchecked Sendable {
     private var store: AccountsStore
@@ -203,3 +202,4 @@ private struct StubRemoteProxyService: RemoteProxyServiceProtocol {
         return ""
     }
 }
+#endif
