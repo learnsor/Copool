@@ -1,5 +1,4 @@
 import Foundation
-import Combine
 
 actor ProxyCoordinator {
     private let proxyService: ProxyRuntimeService

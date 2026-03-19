@@ -254,6 +254,7 @@ final class AccountsCoordinatorTests: XCTestCase {
         XCTAssertEqual(try storeRepository.loadStore().currentSelection?.accountID, account.accountID)
     }
 
+    #if canImport(Combine)
     @MainActor
     func testAccountsPageModelBootstrapsFromInitialAccounts() {
         let account = AccountSummary(
@@ -296,6 +297,7 @@ final class AccountsCoordinatorTests: XCTestCase {
         XCTAssertTrue(model.hasResolvedInitialState)
         XCTAssertEqual(model.state, AccountsPageModel.makeViewState(accounts: [account], cloudSyncAvailable: true))
     }
+    #endif
 }
 
 private final class InMemoryAccountsStoreRepository: AccountsStoreRepository, @unchecked Sendable {

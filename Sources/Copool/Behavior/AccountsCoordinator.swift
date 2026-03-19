@@ -69,12 +69,14 @@ actor AccountsCoordinator {
 
     @discardableResult
     func importAccountFile(from url: URL, customLabel: String?, setAsCurrent: Bool) async throws -> AccountSummary {
+        #if os(macOS) || os(iOS)
         let didAccess = url.startAccessingSecurityScopedResource()
         defer {
             if didAccess {
                 url.stopAccessingSecurityScopedResource()
             }
         }
+        #endif
 
         let authJSON = try authRepository.readAuth(from: url)
         if setAsCurrent {

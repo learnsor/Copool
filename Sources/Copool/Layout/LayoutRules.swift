@@ -1,4 +1,4 @@
-import CoreGraphics
+import Foundation
 
 /// Centralized layout inputs to avoid duplicated sizing logic across pages.
 enum LayoutRules {

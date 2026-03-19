@@ -1,5 +1,7 @@
 import Foundation
+#if os(macOS)
 import OSLog
+#endif
 
 #if os(macOS)
 actor RemoteProxyService: RemoteProxyServiceProtocol {

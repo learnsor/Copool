@@ -1,4 +1,5 @@
 import XCTest
+#if canImport(Combine)
 import Combine
 @testable import Copool
 
@@ -201,3 +202,4 @@ private struct StubRemoteProxyService: RemoteProxyServiceProtocol {
         return ""
     }
 }
+#endif
