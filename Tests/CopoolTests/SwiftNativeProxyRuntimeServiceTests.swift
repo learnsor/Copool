@@ -1,4 +1,5 @@
 import XCTest
+#if canImport(Network)
 @testable import Copool
 
 final class SwiftNativeProxyRuntimeServiceTests: XCTestCase {
@@ -385,3 +386,4 @@ private final class MockAuthRepository: AuthRepository, @unchecked Sendable {
     }
     func currentAuthAccountID() -> String? { nil }
 }
+#endif

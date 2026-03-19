@@ -1,4 +1,5 @@
 import XCTest
+#if canImport(Combine)
 import Combine
 @testable import Copool
 
@@ -119,6 +120,7 @@ final class ProxyPageModelTests: XCTestCase {
         )
     }
 }
+#endif
 
 private final class InMemoryAccountsStoreRepository: AccountsStoreRepository, @unchecked Sendable {
     private var store: AccountsStore

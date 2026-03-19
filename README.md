@@ -38,6 +38,8 @@ Copool 是一个面向 macOS 和 iOS 的 SwiftUI 应用，用于管理 Codex/Cha
 
 - macOS 14+
 - iOS 26+
+- Linux with Swift 6.0+ (for core package development, tests, and CLI entrypoint)
+- Windows with Swift 6.0+ (for core package development, tests, and CLI entrypoint)
 - Xcode 17+
 - Swift 6 toolchain
 
@@ -48,11 +50,21 @@ cd Copool
 xcodebuild test -project Copool.xcodeproj -scheme Copool -destination 'platform=macOS'
 xcodebuild -project Copool.xcodeproj -scheme Copool -configuration Debug -destination 'platform=macOS' build
 xcodebuild -project Copool.xcodeproj -scheme CopooliOS -configuration Debug -destination 'platform=iOS Simulator,name=iPhone 17' build
+swift test
+swift run Copool
 ```
 
 Open `Copool.xcodeproj` in Xcode and run `Copool` for macOS or `CopooliOS` for iOS.
 
 使用 Xcode 打开 `Copool.xcodeproj`，macOS 运行 `Copool` scheme，iOS 运行 `CopooliOS` scheme。
+
+On Linux, SwiftPM builds the portable core module and runs the existing unit tests. The SwiftUI desktop/mobile app remains available through Xcode on Apple platforms.
+
+在 Linux 上，SwiftPM 会构建可移植的核心模块，并运行现有单元测试；SwiftUI 桌面/移动端应用仍通过 Apple 平台上的 Xcode 运行。
+
+On Windows, SwiftPM uses the same portable core target and CLI entrypoint as Linux. Apple-platform-only integrations (SwiftUI UI, CloudKit, ServiceManagement, AppKit/UIKit flows) stay excluded from the Windows build.
+
+在 Windows 上，SwiftPM 与 Linux 共用同一套可移植核心 target 和命令行入口；SwiftUI 界面、CloudKit、ServiceManagement、AppKit/UIKit 等仅限 Apple 平台的集成不会参与 Windows 构建。
 
 ## Release Channels / 发布渠道
 

@@ -49,26 +49,3 @@ private struct GitHubRelease: Decodable {
         case publishedAt = "published_at"
     }
 }
-
-enum VersionComparator {
-    static func isNewer(latest: String, current: String) -> Bool {
-        let l = normalize(latest)
-        let c = normalize(current)
-        for index in 0..<max(l.count, c.count) {
-            let lv = index < l.count ? l[index] : 0
-            let cv = index < c.count ? c[index] : 0
-            if lv > cv { return true }
-            if lv < cv { return false }
-        }
-        return false
-    }
-
-    private static func normalize(_ version: String) -> [Int] {
-        version
-            .split(whereSeparator: { $0 == "." || $0 == "-" })
-            .map { part in
-                let digits = part.filter(\.isNumber)
-                return Int(digits) ?? 0
-            }
-    }
-}

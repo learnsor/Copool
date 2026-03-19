@@ -91,7 +91,7 @@ enum JSONValue: Codable, Hashable {
         case let value as String:
             return .string(value)
         case let value as NSNumber:
-            if CFGetTypeID(value) == CFBooleanGetTypeID() {
+            if String(cString: value.objCType) == "c" {
                 return .bool(value.boolValue)
             }
             return .number(value.doubleValue)
